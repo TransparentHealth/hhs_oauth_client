@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block Content %}
+
+  <div class="container">
+    
+    <div class="hero-unit">
+    <h1>{% trans "Login with HHS oAuth2" %}</h1>
+  <br>
+   
+    <div class="row">
+      <div class="col-lg-5">
+        {% include "include/messages.html" %}    
+      </div>
+    </div>
+    
+        <div class="row">
+      <div class="col-lg-5">
+        <a  class="btn btn-primary btn-large" href="{% url 'social:begin' 'myoauth' %}">Login</a>   
+      </div>
+    </div>
+    
+    
+	
+    </div>
+	
+{% endblock %}
+
