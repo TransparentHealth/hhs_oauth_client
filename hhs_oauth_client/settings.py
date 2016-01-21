@@ -169,8 +169,8 @@ SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 PROPRIETARY_BACKEND_NAME = 'myoauth'
 # the trailing slash is necessary, because python-social-auth does not follow
 # redirects by default.
-MY_AUTHORIZATION_URL = 'http://localhost:8000/o/authorize/'
-MY_ACCESS_TOKEN_URL =  'http://localhost:8000/o/token/'
+MY_AUTHORIZATION_URL = 'http://127.0.0.1:8000/o/authorize/'
+MY_ACCESS_TOKEN_URL =  'http://127.0.0.1:8000/o/token/'
 LOGIN_URL          = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/accounts/login-error'
