@@ -171,6 +171,7 @@ PROPRIETARY_BACKEND_NAME = 'myoauth'
 # redirects by default.
 MY_AUTHORIZATION_URL = 'http://127.0.0.1:8000/o/authorize/'
 MY_ACCESS_TOKEN_URL =  'http://127.0.0.1:8000/o/token/'
+MY_USER_PROFILE_URL =  'http://127.0.0.1:8000/api/profile/'
 LOGIN_URL          = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/accounts/login-error'
