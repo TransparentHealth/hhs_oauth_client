@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from social.backends.oauth import BaseOAuth2
+
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
@@ -10,6 +12,16 @@ class MyOAuthOAuth2(BaseOAuth2):
     ACCESS_TOKEN_URL    = settings.MY_ACCESS_TOKEN_URL   #'http://127.0.0.1:8000/o/token'
     ACCESS_TOKEN_METHOD = 'POST'
 
+    def get_user_profile_url(self):
+        """
+        Return the url to the user profile endpoint.
+        """
+        user_profile_url = getattr(settings, 'MY_USER_PROFILE_URL', None)
+        if not user_profile_url:
+            raise ImproperlyConfigured("'MY_USER_PROFILE_URL' setting should be defined.")
+
+        return user_profile_url
+
     def get_user_id(self, details, response):
         # Extracts the user id from `user_data` response.
         return response.get('id')
@@ -18,12 +30,10 @@ class MyOAuthOAuth2(BaseOAuth2):
         """
         Return user details from MYOAUTH account
         """
-        # At the moment we generate a random user data, for demonstration
-        # purposes.
         return {
             'username': response.get('username'),
-            'first_name': response.get('username'),
-            'last_name': 'Test',
+            'first_name': response.get('first_name'),
+            'last_name': response.get('last_name'),
             'email': response.get('email'),
         }
 
@@ -31,21 +41,4 @@ class MyOAuthOAuth2(BaseOAuth2):
         """
         Loads user data from service
         """
-        # To work properly, we need to set up an api endpoint that returns
-        # user profile informations. Something like:
-        #
-        #   return self.get_json('http://127.0.0.1:8000/api/profile/',
-        #                        params={'access_token': access_token})
-        #
-        # At the moment we just mock the response with random user informations.
-        import random
-        import string
-        username = ''.join(random.choice(string.ascii_letters) for x in range(10))
-        email = "%s@test.net" % username
-        return {
-            'id': random.randint(1, 999999),
-            'username': username,
-            'first_name': username,
-            'last_name': 'Test',
-            'email': email,
-        }
+        return self.get_json(self.get_user_profile_url(), params={'access_token': access_token})
