@@ -193,6 +193,6 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 try:
-    from settings_local import *
+    from local import *
 except:
     pass
