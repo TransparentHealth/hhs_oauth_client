@@ -14,6 +14,6 @@ from django.core.wsgi import get_wsgi_application
 
 sys.path.append('/home/ubuntu/django-projects/hhs_oauth_client')
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hhs_oauth_client.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hhs_oauth_client.settings.production")
 
 application = get_wsgi_application()
