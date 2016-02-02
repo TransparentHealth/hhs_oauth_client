@@ -8,5 +8,5 @@ from views import *
 urlpatterns = patterns('',
 
     url(r'login', my_login,  name="login"),
-    url(r'login', my_logout,  name="logout"),
+    url(r'logout', my_logout,  name="logout"),
 )
