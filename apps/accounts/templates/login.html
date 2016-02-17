@@ -6,21 +6,18 @@
   <div class="container">
     
     <div class="hero-unit">
-    <h1>{% trans "Login with HHS oAuth2" %}</h1>
-  <br>
-   
-    <div class="row">
-      <div class="col-lg-5">
-        {% include "include/messages.html" %}    
+	  
+	  <div class="row">
+		<div class="col-lg-8">
+		  {% include "include/messages.html" %}    
+		</div>
       </div>
-    </div>
-    
-        <div class="row">
-      <div class="col-lg-5">
-        <a  class="btn btn-primary btn-large" href="{% url 'social:begin' 'myoauth' %}">Login</a>   
-      </div>
-    </div>
-    
+	  
+	  
+    <h1>{% trans "Login" %}  <a  class="btn btn-primary btn-large" href="{% url 'social:begin' 'myoauth' %}">Login with Your CMS Credentials</a></h1>
+
+
+     </div> 
     
 	
     </div>

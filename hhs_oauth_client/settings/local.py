@@ -1,2 +1,20 @@
-SOCIAL_AUTH_MYOAUTH_KEY = 'VATncPlbHYOOGTAsu7se5cufGjgaPJvERjTUdoax'
-SOCIAL_AUTH_MYOAUTH_SECRET = 'xh6lXaTTLq8YMAruHgzCoYd0SBqnat7rp0hetkEIoFxEC1S3yQn0NWA8a9O3p8B7mkkkF9vxT5xtBTvQFT8JKQEFNWuu0kX1bNWRqKkvp8bXMCFqZh9f5jeXQmSmyYRl'
+from .base import *
+
+SECRET_KEY = "HHSCLIENT-LOCAL-_cdlv24!g$4)b&wq9fjn)p!vrs729idssk2qp7iy!u#"
+
+DBPATH=os.path.join(BASE_DIR, 'db/db.db')
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': DBPATH,                   # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+
+
+SOCIAL_AUTH_MYOAUTH_KEY = 'foo'
+SOCIAL_AUTH_MYOAUTH_SECRET = 'bar'

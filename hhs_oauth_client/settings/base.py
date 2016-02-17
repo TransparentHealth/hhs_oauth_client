@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'bootstrapform',
     'apps.accounts',
     'apps.home',
+    'apps.remotecalls',
     'social.apps.django_app.default',
 )
 
