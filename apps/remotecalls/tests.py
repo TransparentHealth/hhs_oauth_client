@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import json
 from unittest import skipIf
 
 from django.conf import settings
@@ -45,7 +46,8 @@ class TestCallViews(BaseApiTest):
         self._create_user(settings.TEST_INTEGRATION_CLIENT_ID)
         self.client.login(username="test_user", password="123456")
         response = self.client.get(reverse('call_read'))
-        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['remote_status_code'], 403)
 
     @override_settings(SOCIAL_AUTH_MYOAUTH_KEY=settings.TEST_INTEGRATION_READ_CLIENT_ID)
     def test_read_call_allowed_when_user_has_read_capability(self):
@@ -54,8 +56,9 @@ class TestCallViews(BaseApiTest):
         self._create_user(settings.TEST_INTEGRATION_READ_CLIENT_ID)
         self.client.login(username="test_user", password="123456")
         response = self.client.get(reverse('call_read'))
-        self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {'hello': 'World', 'oauth2': True})
+        self.assertEqual(response.context['remote_status_code'], 200)
+        remote_content = json.dumps(response.context['remote_content'])
+        self.assertJSONEqual(remote_content, {'hello': 'World', 'oauth2': True})
 
     @override_settings(SOCIAL_AUTH_MYOAUTH_KEY=settings.TEST_INTEGRATION_CLIENT_ID)
     def test_write_call_not_allowed_with_no_write_capability(self):
@@ -63,8 +66,9 @@ class TestCallViews(BaseApiTest):
         # that has no write capability
         self._create_user(settings.TEST_INTEGRATION_CLIENT_ID)
         self.client.login(username="test_user", password="123456")
-        response = self.client.post(reverse('call_write'), {'foo': 'bar'})
-        self.assertEqual(response.status_code, 403)
+        response = self.client.post(reverse('call_write'), {'json': '{"foo": "bar"}'})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['remote_status_code'], 403)
 
     @override_settings(SOCIAL_AUTH_MYOAUTH_KEY=settings.TEST_INTEGRATION_WRITE_CLIENT_ID)
     def test_write_call_allowed_when_user_has_write_capability(self):
@@ -72,6 +76,8 @@ class TestCallViews(BaseApiTest):
         # that has write capabilities.
         self._create_user(settings.TEST_INTEGRATION_WRITE_CLIENT_ID)
         self.client.login(username="test_user", password="123456")
-        response = self.client.post(reverse('call_write'), {'foo': 'bar'})
+        response = self.client.post(reverse('call_write'), {'json': '{"foo": "bar"}'})
         self.assertEqual(response.status_code, 200)
-        self.assertJSONEqual(response.content, {'foo': 'bar', 'write': True})
+        self.assertEqual(response.context['remote_status_code'], 200)
+        remote_content = json.dumps(response.context['remote_content'])
+        self.assertJSONEqual(remote_content, {'foo': 'bar', 'write': True})
