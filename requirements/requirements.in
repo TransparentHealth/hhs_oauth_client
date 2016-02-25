@@ -1,5 +1,6 @@
-Django==1.8.5
+Django<1.9
 django-bootstrap-form
 django-localflavor
 python-social-auth
-
+requests
+requests_oauthlib<0.6
