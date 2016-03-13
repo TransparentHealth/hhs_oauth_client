@@ -7,6 +7,7 @@ from .views import *
 
 
 urlpatterns = patterns('',
-    url(r'^call-read$', call_read, name="call_read"),
-    url(r'^call-write$', call_write, name="call_write"),
+    url(r'^pjson/push$', pjson_provider_push,  name="pjson_provider_push"),
+    url(r'^fhir/push$', fhir_practitioner_push,  name="fhir_practitioner_push"),
+
 )

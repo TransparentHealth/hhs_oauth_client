@@ -7,6 +7,6 @@ from .views import *
 
 
 urlpatterns = patterns('',
-    url(r'^call-read$', call_read, name="call_read"),
-    url(r'^call-write$', call_write, name="call_write"),
+    url(r'^cms/pull/me', bbof_pull_me,  name="bbof_pull_me"),
+
 )
