@@ -11,7 +11,7 @@ except ImportError:
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from django.views.decorators.http import require_POST
+
 
 import requests
 from requests_oauthlib import OAuth2
@@ -20,7 +20,7 @@ from requests_oauthlib import OAuth2
 def bbof_pull_me(request):
     context = {'name': 'Blue Button on FHIR'}
     # first we get the token used to login
-    token = request.user.social_auth.get(provider='myoauth').access_token
+    token = request.user.social_auth.get(provider=settings.PROPRIETARY_BACKEND_NAME).access_token
     auth = OAuth2(settings.SOCIAL_AUTH_MYOAUTH_KEY,
                   token={'access_token': token, 'token_type': 'Bearer'})
     # next we call the remote api
