@@ -65,7 +65,8 @@ def fhir_practitioner_push(request):
             auth = OAuth2(settings.SOCIAL_AUTH_MYOAUTH_KEY,
                           token={'access_token': token, 'token_type': 'Bearer'})
             # next we call the remote api
-            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth/Practitioner/1')
+            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Practitioner/1')
+            print url
             json_data = json.loads(form.cleaned_data['json'])
             response = requests.put(url, auth=auth, json=json_data)
             if response.status_code == 200:
