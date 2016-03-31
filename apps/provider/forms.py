@@ -20,6 +20,7 @@ class JsonForm(forms.Form):
             if type (j) != type({}):
                 msg=_("The field does not contain a valid JSON object.")
                 raise forms.ValidationError(msg)
+            
         except ValueError:  
             msg=_("The field does not contain valid JSON.")
             raise forms.ValidationError(msg)

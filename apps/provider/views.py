@@ -17,6 +17,9 @@ import requests
 from requests_oauthlib import OAuth2
 from .forms import JsonForm
 from django.utils.translation import ugettext_lazy as _
+from collections import OrderedDict
+
+
 # Create your views here.
 
 @login_required
@@ -32,7 +35,7 @@ def pjson_provider_push(request):
                           token={'access_token': token, 'token_type': 'Bearer'})
             # next we call the remote api
             url = urljoin(settings.HHS_OAUTH_URL, '/nppes/update')
-            json_data = json.loads(form.cleaned_data['json'])
+            json_data = json.loads(form.cleaned_data['json'], object_pairs_hook=OrderedDict)
             response = requests.post(url, auth=auth, json=json_data)
             if response.status_code == 200:
                 content = response.json()
@@ -65,16 +68,17 @@ def fhir_practitioner_push(request):
             auth = OAuth2(settings.SOCIAL_AUTH_MYOAUTH_KEY,
                           token={'access_token': token, 'token_type': 'Bearer'})
             # next we call the remote api
-            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Practitioner/1')
-            print url
-            json_data = json.loads(form.cleaned_data['json'])
+            
+            json_data = json.loads(form.cleaned_data['json'], object_pairs_hook=OrderedDict)
+            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Practitioner/%s') % (json_data['id'])
+            
             response = requests.put(url, auth=auth, json=json_data)
             if response.status_code == 200:
-                content = response.json()
+                content = response.text#.json()
             elif response.status_code == 403:
-                content = {'error': 'no write capability'}
+                content = response.text #json()#{'error': 'no write capability'}
             else:
-                content = {'error': 'server error'}
+                content = response.text #json()#{'error': 'server error'}
             context['remote_status_code'] = response.status_code
             context['remote_content'] = content
             return render(request, 'response.html', context)
