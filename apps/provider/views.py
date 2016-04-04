@@ -38,7 +38,7 @@ def pjson_provider_push(request):
             json_data = json.loads(form.cleaned_data['json'], object_pairs_hook=OrderedDict)
             response = requests.post(url, auth=auth, json=json_data)
             if response.status_code == 200:
-                content = response.json()
+                content = response.text#json()
             elif response.status_code == 403:
                 content = {'error': 'no write capability'}
             else:
