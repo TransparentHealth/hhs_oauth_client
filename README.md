@@ -1,11 +1,18 @@
-HHS oAuth Client  - An oAuth Provider Sample Project
-================================================
+HHS OAuth Client  - An OAuth Provider Sample Project
+====================================================
+
+## Which Version of Python?
+
+This application has been tested using Python 3.5.1
 
 ## Quick Setup
 
-    git clone https://github.com/videntity/hhs_oauth_client.git
+    git clone https://github.com/TransparentHealth/hhs_oauth_client.git
     pip install -r oauth_provider/requirements.txt
-    python manage.py syncdb
+    mkdir db
+    touch db/db.db
+    python manage.py makemigrations
+    python manage.py migrate
     python manage.py runserver
 
 ## Running the tests

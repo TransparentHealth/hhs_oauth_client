@@ -1,3 +1,5 @@
+/db
+/db/db.db
 *.pyc
 *.komodoproject
 *~

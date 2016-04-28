@@ -106,7 +106,6 @@ DATABASES = {
     }
 }
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -200,3 +199,5 @@ try:
     from local import *
 except:
     pass
+
+print("Databases:", DATABASES)
