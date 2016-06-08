@@ -29,14 +29,15 @@
 
     <div class="row">
         <div class="col-lg-12">
-            
-			
-			 <!-- <a href="/patient/cms/pull/me"><button type="button" class="btn btn-primary">Get My Personal Health Data</button> </a>--> 
-		     <a href="/provider/fhir/push"><button type="button" class="btn btn-primary">Push Practitioner FHIR</button> </a>
+
+
+			 <!-- <a href="/patient/cms/pull/me"><button type="button" class="btn btn-primary">Get My Personal Health Data</button> </a>-->
+		     <a href="/provider/fhir/practioner/push"><button type="button" class="btn btn-primary">Push Practitioner FHIR</button> </a>
+         <a href="/provider/fhir/organization/push"><button type="button" class="btn btn-primary">Push Organization FHIR</button> </a>
 		     <a href="/provider/pjson/push"><button type="button" class="btn btn-primary">Push Provider JSON</button> </a>
-			
-			<!--<a href="{% url "call_read" %}"><button type="button" class="btn btn-primary">Call Read</button> </a>--> 
-			
+
+			<!--<a href="{% url "call_read" %}"><button type="button" class="btn btn-primary">Call Read</button> </a>-->
+
 			<!--
             <form method="post" action="{% url "call_write" %}">
                 {% csrf_token %}
@@ -57,4 +58,3 @@
 
 
 {% endblock %}
-
