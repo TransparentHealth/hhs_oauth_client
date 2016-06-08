@@ -4,3 +4,4 @@ django-localflavor
 python-social-auth
 requests
 requests_oauthlib<0.6
+pdt
