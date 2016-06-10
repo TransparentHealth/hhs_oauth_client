@@ -70,7 +70,7 @@ def fhir_practitioner_push(request):
             # next we call the remote api
 
             json_data = json.loads(form.cleaned_data['json'], object_pairs_hook=OrderedDict)
-            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Practitioner/%s') % (json_data['id'])
+            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Practitioner/%s') % (int(json_data['identifier'][0]['value']))
 
             response = requests.put(url, auth=auth, json=json_data)
             if response.status_code == 200:
@@ -105,7 +105,7 @@ def fhir_organization_push(request):
             # next we call the remote api
 
             json_data = json.loads(form.cleaned_data['json'], object_pairs_hook=OrderedDict)
-            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Organization/%s') % (json_data['id'])
+            url = urljoin(settings.HHS_OAUTH_URL, '/fhir/v3/oauth2/Organization/%s') % (int(json_data['identifier'][0]['value']))
 
             response = requests.put(url, auth=auth, json=json_data)
             if response.status_code == 200:
