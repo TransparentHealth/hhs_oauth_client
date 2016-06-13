@@ -14,14 +14,14 @@ DATABASES = {
     }
 }
 
-STATIC_URL = '//static-oauth.npi.io/static-c/'
+# STATIC_URL = '//static-oauth.npi.io/static-c/'
 
 
-SOCIAL_AUTH_MYOAUTH_KEY = 'f9BL8Q16PRBrsbZocmmDkV5Q03wma0eWouOWx25z'
-SOCIAL_AUTH_MYOAUTH_SECRET = 'tymFpjhaoy8QKrKwm4JSzRtZ1k5RtEQkl9AHSLDM722qeG4ClxjGq076NuAxpEoR4HREeATKr8FCxyz17a2U0R1y0x0u9BuEgPGFMBTCHbBBxAV9dfmSBl6PJInetw7B'
+SOCIAL_AUTH_MYOAUTH_KEY = '0viv62YJiiV3YFsq0pOZ6Q5yMJpjhmzKXbmGKcOc'
+SOCIAL_AUTH_MYOAUTH_SECRET = 'fyiFRWOfePo0YgQjKxQIufjsG5kuOvJorbBcgiPN2suIotaRcGQfBuIlX44zu3610Y0V9xy8Ii9504gt48JuhpQY0TPqmAsfSk6SVGdkL8u5sdogaTlbKVljV2GATzDB'
 # the trailing slash is necessary, because python-social-auth does not follow
 # redirects by default.
-HHS_OAUTH_URL = "http://oauth.npi.io"
+HHS_OAUTH_URL = "https://oauth2.npi.io"
 MY_AUTHORIZATION_URL = ('%s/o/authorize/') % (HHS_OAUTH_URL)
 MY_ACCESS_TOKEN_URL =  '%s/o/token/' % (HHS_OAUTH_URL)
 MY_USER_PROFILE_URL =  '%s/api/profile/' % (HHS_OAUTH_URL)
