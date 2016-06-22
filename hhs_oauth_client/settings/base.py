@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'apps.patient',
     'apps.provider',
     'social.apps.django_app.default',
+    #'hhs_oauth_client',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -200,4 +201,3 @@ try:
 except:
     pass
 
-print("Databases:", DATABASES)

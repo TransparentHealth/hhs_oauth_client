@@ -80,4 +80,6 @@ class TestCallViews(BaseApiTest):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context['remote_status_code'], 200)
         remote_content = json.dumps(response.context['remote_content'])
+
+        # print("REMOTE CONTENT:", remote_content)
         self.assertJSONEqual(remote_content, {'foo': 'bar', 'write': True})
