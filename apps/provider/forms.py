@@ -5,6 +5,92 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 import json
 from pdt import json_schema_check_fhir
+import requests
+from .models import Practitioner, Address
+from collections import OrderedDict
+
+
+class PractitionerModelForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+         super(PractitionerModelForm, self).__init__(*args, **kwargs)
+         instance = getattr(self, 'instance', None)
+         if instance and instance.pk:
+            self.fields['npi'].widget.attrs['readonly'] = True
+            self.fields['fhir_id'].widget.attrs['readonly'] = True
+
+    
+    class Meta:
+        model = Practitioner
+        fields = ('npi','fhir_id','first_name', 'last_name',)
+
+
+
+class FetchPractitionerForm(forms.Form):
+    npi = forms.CharField(label='NPI', max_length=10,
+            help_text =_("Enter a valid NPI"))
+
+    required_css_class = 'required'
+    def clean_npi(self):
+        npi = self.cleaned_data.get('npi')
+        url = "https://registry.npi.io/search/fhir/Practitioner.json?identifier.value=%s" % (npi)
+        response = requests.get(url)
+        try:
+            jr = json.loads(response.text)
+            
+            if 'results' not in jr:
+                msg=_("The lookup failed. Invalid response from server")
+                raise forms.ValidationError(msg)
+            
+            if not jr['results']:
+                    msg=_("Invalid NPI")
+                    raise forms.ValidationError(msg) 
+        except ValueError:
+            msg=_("The lookup failed. JSON was not returned bt the server.")
+            raise forms.ValidationError(msg)
+        return npi 
+        
+        
+
+class AddressForm(forms.Form):
+    line_1= forms.CharField(max_length=255)
+    line_2  = forms.CharField(max_length=255, required=False)
+    city= forms.CharField(max_length=255)
+    state= forms.CharField(max_length=2)
+    postal_code= forms.CharField(max_length=15)
+    country= forms.CharField(max_length=2)
+    use  = forms.ChoiceField(choices = (('home','home'),
+        ('work','work'),('mailing', 'mailing')))
+    required_css_class = 'required'
+
+    def create_fhir_json(self):
+        json_fhir_dict = OrderedDict()
+        json_fhir_dict['line']=[]
+        json_fhir_dict['line'].append(self.cleaned_data.get('line_1'))
+        json_fhir_dict['line'].append(self.cleaned_data.get('line_2'))
+        json_fhir_dict['city'] = self.cleaned_data.get('city')
+        json_fhir_dict['state'] = self.cleaned_data.get('state')
+        json_fhir_dict['postalCode'] = self.cleaned_data.get('postal_code')
+        json_fhir_dict['country'] = self.cleaned_data.get('country')
+        json_fhir_dict['use'] = self.cleaned_data.get('use')
+        return json.dumps(json_fhir_dict, indent=4)
+        
+
+
+class PractitionerHumanForm(forms.Form):
+    first_name = forms.CharField(max_length=255)
+    last_name  = forms.CharField(max_length=255)
+    
+    
+    required_css_class = 'required'
+
+
+class OrganizationHumanForm(forms.Form):
+    organization_name = forms.CharField(max_length=255)
+    
+    required_css_class = 'required'
+
+
+
 
 class JsonForm(forms.Form):
     json = forms.CharField(label='JSON body', max_length=10000, widget=forms.Textarea,

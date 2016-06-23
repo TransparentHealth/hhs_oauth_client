@@ -12,5 +12,10 @@ urlpatterns = patterns('',
     url(r'^fhir/organization/push$', fhir_organization_push,  name="fhir_organization_push"),
     url(r'^fhir/practitioner/update$', fhir_practitioner_update,  name="fhir_practitioner_update"),
     url(r'^fhir/organization/update$', fhir_organization_update,  name="fhir_organization_update"),
-
+    url(r'^fetch-practitioner$',  fetch_practitioner,  name="fetch_practitioner"),
+    url(r'^update-practitioner/(?P<npi>[^/]+)$',  update_practitioner,  name="update_practitioner"),
+    url(r'^address/update/(?P<id>[^/]+)$',  update_address,  name="update_address"),
+    url(r'^address/delete/(?P<id>[^/]+)$',  delete_address,  name="delete_address"),
+    url(r'^address/create/(?P<npi>[^/]+)$',  create_address,  name="create_address"),
+    url(r'^submit-to-fhir-server/(?P<npi>[^/]+)$',  submit_to_fhir,  name="submit_to_fhir"),
 )

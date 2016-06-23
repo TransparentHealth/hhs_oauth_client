@@ -174,7 +174,7 @@ PROPRIETARY_BACKEND_NAME = 'myoauth'
 HHS_OAUTH_URL = 'http://oauth:8000/'
 MY_AUTHORIZATION_URL = 'http://oauth:8000/o/authorize/'
 MY_ACCESS_TOKEN_URL =  'http://oauth:8000/o/token/'
-MY_USER_PROFILE_URL =  'http://oauth:8000/api/profile/'
+MY_USER_PROFILE_URL =  'http://oauth:8000/profile/me'
 LOGIN_URL          = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/accounts/login-error'
@@ -199,5 +199,3 @@ try:
     from local import *
 except:
     pass
-
-print("Databases:", DATABASES)
