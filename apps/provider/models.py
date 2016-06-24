@@ -134,8 +134,8 @@ class Practitioner(models.Model):
                                               )
     fhir_id                 = models.CharField(max_length=24, default="", unique=True,
                                                 verbose_name="FHIR ID")
-    first_name              = models.CharField(max_length=256, default="")
-    last_name               = models.CharField(max_length=256, default="")
+    first_name              = models.CharField(max_length=256, default="", blank=True)
+    last_name               = models.CharField(max_length=256, default="", blank =True)
     doing_business_as       = models.CharField(max_length=256, default="", blank=True)
     
     def __str__(self):

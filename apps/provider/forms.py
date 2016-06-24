@@ -17,7 +17,8 @@ class PractitionerModelForm(forms.ModelForm):
          if instance and instance.pk:
             self.fields['npi'].widget.attrs['readonly'] = True
             self.fields['fhir_id'].widget.attrs['readonly'] = True
-
+            self.fields['first_name'].widget.attrs['required'] = True
+            self.fields['last_name'].widget.attrs['required'] = True
     
     class Meta:
         model = Practitioner

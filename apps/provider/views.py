@@ -22,7 +22,8 @@ from django.utils.translation import ugettext_lazy as _
 from collections import OrderedDict
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-from .utils import get_practitioner, convert_practioner_fhir_to_form
+from .utils import (get_practitioner, convert_practioner_fhir_to_form,
+                    convert_practioner_fhir_to_meta)
 from .models import Practitioner, Address
 import json
 
@@ -48,8 +49,6 @@ def fetch_practitioner(request):
 @login_required
 def submit_to_fhir(request, npi):
     p = get_object_or_404(Practitioner, npi=npi)
-    
-    
     print(p.to_fhir_json())
     messages.success(request,_("Practitioner updates submitted to the central provider directory"))
     return HttpResponseRedirect(reverse('update_practitioner', args=(npi,)))
@@ -78,11 +77,13 @@ def update_practitioner(request, npi):
     pract_res =  get_practitioner(npi)
     #print(json.dumps(pract_res, indent =4))
     
+    meta_data = convert_practioner_fhir_to_meta(pract_res, request.user)
+
     data = convert_practioner_fhir_to_form(pract_res, request.user)
     
-    p, get_or_create = Practitioner.objects.get_or_create(**data)
+    p, create = Practitioner.objects.get_or_create(**meta_data)
     #Delete old addresses (if any) when this is a create
-    if get_or_create:
+    if create:
         Address.objects.filter(npi=npi).delete()
         #Add new addresses
         for a in pract_res['address']:

@@ -29,4 +29,14 @@ def convert_practioner_fhir_to_form(pract_res, user):
     
     
     return data
+
+
+def convert_practioner_fhir_to_meta(pract_res, user):
+    """Converts a Practitioner Resource into Values for Form"""
+    data = {}
+    data['user'] = user
+    data['npi']= pract_res['identifier'][0]['value']
+    data['fhir_id']= pract_res['id']
     
+    
+    return data
