@@ -24,4 +24,4 @@ SOCIAL_AUTH_MYOAUTH_SECRET = 'fyiFRWOfePo0YgQjKxQIufjsG5kuOvJorbBcgiPN2suIotaRcG
 HHS_OAUTH_URL = "https://oauth2.npi.io"
 MY_AUTHORIZATION_URL = ('%s/o/authorize/') % (HHS_OAUTH_URL)
 MY_ACCESS_TOKEN_URL =  '%s/o/token/' % (HHS_OAUTH_URL)
-MY_USER_PROFILE_URL =  '%s/api/profile/' % (HHS_OAUTH_URL)
+MY_USER_PROFILE_URL =  '%s/connect/userinfo' % (HHS_OAUTH_URL)

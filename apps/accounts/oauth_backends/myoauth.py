@@ -31,9 +31,9 @@ class MyOAuthOAuth2(BaseOAuth2):
         Return user details from MYOAUTH account
         """
         return {
-            'username': response.get('username'),
-            'first_name': response.get('first_name'),
-            'last_name': response.get('last_name'),
+            'username': response.get('sub'),
+            'first_name': response.get('given_name'),
+            'last_name': response.get('family_name'),
             'email': response.get('email'),
         }
 

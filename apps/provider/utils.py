@@ -38,6 +38,8 @@ def convert_practitioner_fhir_to_meta(pract_res, user):
     data = {}
     data['user'] = user
     data['npi']= pract_res['identifier'][0]['value']
+    data['first_name']= pract_res['name'][0]['given'][0]
+    data['last_name']= pract_res['name'][0]['family'][0]
     data['fhir_id']= pract_res['id']
 
 

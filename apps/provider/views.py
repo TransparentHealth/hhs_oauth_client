@@ -77,13 +77,19 @@ def update_practitioner(request, npi):
 
     #This is an HTTP GET so do a fetch
     pract_res =  get_practitioner(npi)
-    pecos_res = get_pecos_individual_affliliation
-    #print(json.dumps(pract_res, indent =4))
+    pecos_res = get_pecos_individual_affliliation(npi)
+    
+    print("NPPES",json.dumps(pract_res, indent =4))
+    #print("PECOS",json.dumps(pecos_res, indent =4))
 
     meta_data = convert_practitioner_fhir_to_meta(pract_res, request.user)
 
     data = convert_practitioner_fhir_to_form(pract_res, request.user)
-
+    
+    print(meta_data)
+    
+    
+    
     p, create = Practitioner.objects.get_or_create(**meta_data)
     #Delete old addresses (if any) when this is a create
     if create:
@@ -93,7 +99,7 @@ def update_practitioner(request, npi):
             Address.objects.create(npi=npi,
                                    fhir_json_snipit=json.dumps(a, indent=4))
 
-        Affiliations.objects.filter(npi=npi).delete()
+        Affiliation.objects.filter(npi=npi).delete()
         #Add new addresses
         for b in pecos_res['affiliation']:
             Affiliation.objects.create(npi=npi,

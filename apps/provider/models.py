@@ -123,43 +123,27 @@ class License(models.Model):
 
 @python_2_unicode_compatible
 class Affiliation(models.Model):
-    npi                     = models.CharField(max_length=10, default="",
+    npi = models.CharField(max_length=10, default="",
                                                blank=True)
-    fhir_json_snipit        = models.TextField(max_length=2000, default="")
-
+    fhir_json_snipit = models.TextField(max_length=2000, default="")
 
     def __str__(self):
-        return "%s" % (self.id)
-
-    def as_dict(self):
-        result = {}
-        try:
-            j = json.loads(self.fhir_json_snipit)
-            result['line_1'] = j['line'][0]
-            result['line_2'] = j['line'][1]
-            result['city'] = j['city']
-            result['state'] = j['state']
-            result['postal_code'] = j['postalCode']
-            result['use'] = j['use']
-            result['country'] = j['country']
-            return result
-        except:
-            return {}
-
-    def npi(self):
-        try:
-            j = json.loads(self.fhir_json_snipit)
-            return j['npi']
-        except:
-            return ""
-
-
-    def postal_code(self):
-        try:
-            j = json.loads(self.fhir_json_snipit)
-            return j['postalCode']
-        except:
-            return ""
+        return "%s" % (self.npi)
+    # 
+    # def as_dict(self):
+    #     result = {}
+    #     try:
+    #         j = json.loads(self.fhir_json_snipit)
+    #         return result
+    #     except:
+    #         return {}
+    # 
+    # def npi(self):
+    #     try:
+    #         j = json.loads(self.fhir_json_snipit)
+    #         return j['npi']
+    #     except:
+    #         return ""
 
 
 

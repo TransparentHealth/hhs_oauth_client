@@ -25,9 +25,9 @@ BASE_DIR = os.path.join( BASE_DIR, '..')
 SECRET_KEY = 'piehme*+^#hylq8uz2eszps%o!5!+*#1@+*83gmp$o(u3%!ldp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -164,8 +164,8 @@ SOCIAL_AUTH_INSTAGRAM_EXTRA_ARGUMENTS = {'scope': 'likes comments relationships'
 
 
 # myoauth oauth2
-SOCIAL_AUTH_MYOAUTH_KEY = 'NNB95dtMtiIhwxf8amhXaJfHG8SFMC7bWxUFWqNa'
-SOCIAL_AUTH_MYOAUTH_SECRET = 'wTupiam0f9IDXxHxOftLM18WLPSODdo0GL9OthcXwiS3zW8fl1VWr13lzFrW8jl7HQzxJnlu4WJfuLs9nnQiGyg0aYkASZun9M9PktYryN1lJm7zNemqeeZOiPLMDZdx'
+SOCIAL_AUTH_MYOAUTH_KEY = 'qexcETkxtyuXD3rSS8whIKz8MX8itgr5kO1djRMf'
+SOCIAL_AUTH_MYOAUTH_SECRET = 'GdkWb0hTYbQDzljNhnnNxz5jmw563BNNrohbG7A59o9D1PCHj9RWc39RppFnFOcCtu05Obt38rwQaKqTHI3KGjvEpb2GDPniDeTbhf5WZEkJgXeWiAFalKVcXzZgGZYP'
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 PROPRIETARY_BACKEND_NAME = 'myoauth'
@@ -174,7 +174,7 @@ PROPRIETARY_BACKEND_NAME = 'myoauth'
 HHS_OAUTH_URL = 'http://oauth:8000/'
 MY_AUTHORIZATION_URL = 'http://oauth:8000/o/authorize/'
 MY_ACCESS_TOKEN_URL =  'http://oauth:8000/o/token/'
-MY_USER_PROFILE_URL =  'http://oauth:8000/profile/me'
+MY_USER_PROFILE_URL =  'http://oauth:8000/connect/userinfo'
 LOGIN_URL          = '/accounts/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL    = '/accounts/login-error'
