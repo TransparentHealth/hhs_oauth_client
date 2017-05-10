@@ -8,6 +8,7 @@ from django.conf import settings
 
 class MyOAuthOAuth2(BaseOAuth2):
     name                = settings.PROPRIETARY_BACKEND_NAME
+    ID_KEY = 'email'
     AUTHORIZATION_URL   = settings.MY_AUTHORIZATION_URL  #  'http://127.0.0.1:8000/o/authorize'
     ACCESS_TOKEN_URL    = settings.MY_ACCESS_TOKEN_URL   #'http://127.0.0.1:8000/o/token'
     ACCESS_TOKEN_METHOD = 'POST'
@@ -24,7 +25,7 @@ class MyOAuthOAuth2(BaseOAuth2):
 
     def get_user_id(self, details, response):
         # Extracts the user id from `user_data` response.
-        return response.get('id')
+        return response.get('email')
 
     def get_user_details(self, response):
         """

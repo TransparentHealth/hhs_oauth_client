@@ -169,6 +169,7 @@ SOCIAL_AUTH_MYOAUTH_SECRET = 'GdkWb0hTYbQDzljNhnnNxz5jmw563BNNrohbG7A59o9D1PCHj9
 SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
 SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
 PROPRIETARY_BACKEND_NAME = 'myoauth'
+SOCIAL_AUTH_ALWAYS_ASSOCIATE = True
 # the trailing slash is necessary, because python-social-auth does not follow
 # redirects by default.
 HHS_OAUTH_URL = 'http://oauth:8000/'
@@ -192,6 +193,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.debug.debug',
     'social.pipeline.social_auth.load_extra_data',
     'social.pipeline.user.user_details',
+    'social.pipeline.social_auth.associate_by_email',
     'social.pipeline.debug.debug'
 )
 
