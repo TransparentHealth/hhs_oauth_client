@@ -12,7 +12,7 @@
         </div>
 
       </div>
-	  
+
 	  <div class="row">
 
         <div class="col-lg-12">
@@ -20,13 +20,13 @@
         </div>
 
       </div>
-	  
+
 
       <div class="row">
 
         <div class="col-lg-12">
-	  
-	
+
+
 
   {% if additional_info %}
     <div class="alert alert-block">
@@ -36,21 +36,21 @@
     </div>
 
   {% endif %}
- 
+
 <div class="row">
-  
+
     <div class="col-lg-8">
       {% include "include/messages.html" %}
-      
+
       <form class="well" method="post" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        
+
 	{% load bootstrap %}
 	{{ form|bootstrap }}
-        
+
 	<input type="submit" class="btn btn-success btn-large"  value="{% trans 'Continue' %}" /><br>
 	<a href="javascript:history.go(-1)">{% trans "Go Back" %}</a>
-      
+
       </form>
     </div>
 
@@ -60,8 +60,6 @@
 
     </div><!-- /.container -->
 
-  
+
 
 {% endblock %}
-
-
